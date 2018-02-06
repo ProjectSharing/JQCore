@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JQCore", "JQCore\JQCore.csproj", "{64DA2095-B3C3-4CBE-8AA9-F28B1831FE8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JQCore.DataAccess", "JQCore.DataAccess\JQCore.DataAccess.csproj", "{FE7A0CA8-0652-43D7-A1D1-A7B212917565}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JQCore.Redis", "JQCore.Redis\JQCore.Redis.csproj", "{56E6893E-C8B8-4019-8153-6729C8354241}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JQCore.MQ", "JQCore.MQ\JQCore.MQ.csproj", "{2AFDF7F6-4AC1-433E-8A7E-2F39DC4C7769}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JQCore.Hangfire", "JQCore.Hangfire\JQCore.Hangfire.csproj", "{DAEFD34F-30A0-489B-884B-656DB39879B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JQCore.Mvc", "JQCore.Mvc\JQCore.Mvc.csproj", "{2932EB0B-67ED-4D46-A1AE-28184D65BC3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64DA2095-B3C3-4CBE-8AA9-F28B1831FE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64DA2095-B3C3-4CBE-8AA9-F28B1831FE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64DA2095-B3C3-4CBE-8AA9-F28B1831FE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64DA2095-B3C3-4CBE-8AA9-F28B1831FE8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE7A0CA8-0652-43D7-A1D1-A7B212917565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE7A0CA8-0652-43D7-A1D1-A7B212917565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE7A0CA8-0652-43D7-A1D1-A7B212917565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE7A0CA8-0652-43D7-A1D1-A7B212917565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E6893E-C8B8-4019-8153-6729C8354241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E6893E-C8B8-4019-8153-6729C8354241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E6893E-C8B8-4019-8153-6729C8354241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E6893E-C8B8-4019-8153-6729C8354241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AFDF7F6-4AC1-433E-8A7E-2F39DC4C7769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AFDF7F6-4AC1-433E-8A7E-2F39DC4C7769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AFDF7F6-4AC1-433E-8A7E-2F39DC4C7769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AFDF7F6-4AC1-433E-8A7E-2F39DC4C7769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAEFD34F-30A0-489B-884B-656DB39879B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAEFD34F-30A0-489B-884B-656DB39879B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAEFD34F-30A0-489B-884B-656DB39879B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAEFD34F-30A0-489B-884B-656DB39879B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2932EB0B-67ED-4D46-A1AE-28184D65BC3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2932EB0B-67ED-4D46-A1AE-28184D65BC3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2932EB0B-67ED-4D46-A1AE-28184D65BC3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2932EB0B-67ED-4D46-A1AE-28184D65BC3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8066581E-2FDC-44E3-9827-B9E086841227}
+	EndGlobalSection
+EndGlobal

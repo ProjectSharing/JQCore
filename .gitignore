@@ -1,0 +1,13 @@
+/.vs
+/JQCore/obj
+/JQCore/bin
+/JQCore.DataAccess/obj
+/JQCore.DataAccess/bin
+/JQCore.Hangfire/obj
+/JQCore.Hangfire/bin
+/JQCore.MQ/obj
+/JQCore.MQ/bin
+/JQCore.Mvc/obj
+/JQCore.Mvc/bin
+/JQCore.Redis/obj
+/JQCore.Redis/bin
