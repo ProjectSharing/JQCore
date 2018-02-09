@@ -372,6 +372,23 @@ namespace JQCore.DataAccess.Utils
         /// 拼接查询前几条的SqlQuery
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序字段</param>
+        /// <param name="tableName">表名</param>
+        /// <param name="topCount">查询数量</param>
+        /// <param name="dbType">数据库类型，默认MSSQLServer</param>
+        /// <returns>查询的SqlQuery</returns>
+        public static SqlQuery BuilderQueryTopSqlQuery<T, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string tableName, int topCount = 1, DatabaseType dbType = DatabaseType.MSSQLServer)
+        {
+            var order = orderExpression?.GetMemberName();
+            return BuilderQueryTopSqlQuery(condition, tableName, order, topCount: topCount, dbType: dbType);
+        }
+
+        /// <summary>
+        /// 拼接查询前几条的SqlQuery
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="condition">查询条件</param>
         /// <param name="tableName">表名</param>
         /// <param name="order">排序字段</param>
@@ -442,6 +459,22 @@ namespace JQCore.DataAccess.Utils
         public static SqlQuery BuilderQuerySqlQuery<T>(Expression<Func<T, bool>> condition, string tableName, DatabaseType dbType = DatabaseType.MSSQLServer)
         {
             return BuilderQuerySqlQuery(condition, tableName, string.Empty, dbType: dbType);
+        }
+
+        /// <summary>
+        /// 拼接查询的SqlQuery
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TProperty">排序字段</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序条件</param>
+        /// <param name="tableName">表名</param>
+        /// <param name="dbType">数据库类型，默认MSSQLServer</param>
+        /// <returns>查询的SqlQuery</returns>
+        public static SqlQuery BuilderQuerySqlQuery<T, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string tableName, DatabaseType dbType = DatabaseType.MSSQLServer)
+        {
+            var order = orderExpression?.GetMemberName();
+            return BuilderQuerySqlQuery(condition, tableName, order, dbType: dbType);
         }
 
         /// <summary>
@@ -534,6 +567,25 @@ namespace JQCore.DataAccess.Utils
         /// </summary>
         /// <typeparam name="TModel">查询字段的类型</typeparam>
         /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TProperty">排序字段</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序字段</param>
+        /// <param name="tableName">表名</param>
+        /// <param name="topCount">查询数量</param>
+        /// <param name="ignoreFields">需要忽略的字段</param>
+        /// <param name="dbType">数据库类型，默认MSSQLServer</param>
+        /// <returns></returns>
+        public static SqlQuery BuilderQueryTopSqlQuery<TModel, T, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string tableName, int topCount = 1, string[] ignoreFields = null, DatabaseType dbType = DatabaseType.MSSQLServer)
+        {
+            var order = orderExpression?.GetMemberName();
+            return BuilderQueryTopSqlQuery<TModel, T>(condition, tableName, order, topCount: topCount, ignoreFields: ignoreFields, dbType: dbType);
+        }
+
+        /// <summary>
+        /// 拼接查询前几条的SqlQuery
+        /// </summary>
+        /// <typeparam name="TModel">查询字段的类型</typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="condition">查询条件</param>
         /// <param name="tableName">表名</param>
         /// <param name="order">排序字段</param>
@@ -613,6 +665,24 @@ namespace JQCore.DataAccess.Utils
         public static SqlQuery BuilderQuerySqlQuery<TModel, T>(Expression<Func<T, bool>> condition, string tableName, string[] ignoreFields = null, DatabaseType dbType = DatabaseType.MSSQLServer)
         {
             return BuilderQuerySqlQuery<TModel, T>(condition, tableName, string.Empty, ignoreFields: ignoreFields, dbType: dbType);
+        }
+
+        /// <summary>
+        /// 拼接查询的SqlQuery
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序字段</param>
+        /// <param name="tableName">表名</param>
+        /// <param name="ignoreFields">需要忽略的字段</param>
+        /// <param name="dbType">数据库类型，默认MSSQLServer</param>
+        /// <returns>查询的SqlQuery</returns>
+        public static SqlQuery BuilderQuerySqlQuery<TModel, T, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string tableName, string[] ignoreFields = null, DatabaseType dbType = DatabaseType.MSSQLServer)
+        {
+            var order = orderExpression.GetMemberName();
+            return BuilderQuerySqlQuery<TModel, T>(condition, tableName, order, ignoreFields: ignoreFields, dbType: dbType);
         }
 
         /// <summary>

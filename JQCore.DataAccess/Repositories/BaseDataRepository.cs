@@ -395,6 +395,21 @@ namespace JQCore.DataAccess.Repositories
         }
 
         /// <summary>
+        /// 获取单个对象
+        /// </summary>
+        /// <typeparam name="TProperty">排序字段类型</typeparam>
+        /// <param name="condition">获取条件</param>
+        /// <param name="orderExpression">排序字段</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        public T GetInfo<TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false)
+        {
+            SqlQuery query = SqlQueryUtil.BuilderQueryTopSqlQuery(condition, orderExpression, TableName, topCount: 1, dbType: isWrite ? WriterDataType : ReaderDataType);
+            return GetDataAccess(isWrite: isWrite).QuerySingleOrDefault<T>(query);
+        }
+
+        /// <summary>
         /// 异步获取单个对象
         /// </summary>
         /// <param name="condition">获取条件</param>
@@ -404,6 +419,21 @@ namespace JQCore.DataAccess.Repositories
         public Task<T> GetInfoAsync(Expression<Func<T, bool>> condition, string[] ignoreFields = null, bool isWrite = false)
         {
             SqlQuery query = SqlQueryUtil.BuilderQueryTopSqlQuery(condition, TableName, topCount: 1, dbType: isWrite ? WriterDataType : ReaderDataType);
+            return GetDataAccess(isWrite: isWrite).QuerySingleOrDefaultAsync<T>(query);
+        }
+
+        /// <summary>
+        /// 异步获取单个对象
+        /// </summary>
+        /// <typeparam name="TProperty">排序字段类型</typeparam>
+        /// <param name="condition">获取条件</param>
+        /// <param name="orderExpression">排序字段</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        public Task<T> GetInfoAsync<TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false)
+        {
+            SqlQuery query = SqlQueryUtil.BuilderQueryTopSqlQuery(condition, orderExpression, TableName, topCount: 1, dbType: isWrite ? WriterDataType : ReaderDataType);
             return GetDataAccess(isWrite: isWrite).QuerySingleOrDefaultAsync<T>(query);
         }
 
@@ -450,6 +480,22 @@ namespace JQCore.DataAccess.Repositories
         }
 
         /// <summary>
+        /// 获取传输对象
+        /// </summary>
+        /// <typeparam name="TDto">传输对象类型</typeparam>
+        /// <typeparam name="TProperty">排序字段</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序条件</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        public TDto GetDto<TDto, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false)
+        {
+            SqlQuery query = SqlQueryUtil.BuilderQueryTopSqlQuery<TDto, T, TProperty>(condition, orderExpression, TableName, topCount: 1, ignoreFields: ignoreFields, dbType: isWrite ? WriterDataType : ReaderDataType);
+            return GetDataAccess(isWrite: isWrite).QuerySingleOrDefault<TDto>(query);
+        }
+
+        /// <summary>
         /// 异步获取传输对象
         /// </summary>
         /// <typeparam name="TDto">传输对象类型</typeparam>
@@ -460,6 +506,22 @@ namespace JQCore.DataAccess.Repositories
         public Task<TDto> GetDtoAsync<TDto>(Expression<Func<T, bool>> condition, string[] ignoreFields = null, bool isWrite = false)
         {
             SqlQuery query = SqlQueryUtil.BuilderQueryTopSqlQuery<TDto, T>(condition, TableName, topCount: 1, ignoreFields: ignoreFields, dbType: isWrite ? WriterDataType : ReaderDataType);
+            return GetDataAccess(isWrite: isWrite).QuerySingleOrDefaultAsync<TDto>(query);
+        }
+
+        /// <summary>
+        /// 异步获取传输对象
+        /// </summary>
+        /// <typeparam name="TDto">传输对象类型</typeparam>
+        /// <typeparam name="TProperty">排序字段</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序条件</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        public Task<TDto> GetDtoAsync<TDto, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false)
+        {
+            SqlQuery query = SqlQueryUtil.BuilderQueryTopSqlQuery<TDto, T, TProperty>(condition, orderExpression, TableName, topCount: 1, ignoreFields: ignoreFields, dbType: isWrite ? WriterDataType : ReaderDataType);
             return GetDataAccess(isWrite: isWrite).QuerySingleOrDefaultAsync<TDto>(query);
         }
 

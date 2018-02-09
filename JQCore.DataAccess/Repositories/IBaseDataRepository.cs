@@ -145,6 +145,18 @@ namespace JQCore.DataAccess.Repositories
         TDto GetDto<TDto>(Expression<Func<T, bool>> condition, string[] ignoreFields = null, bool isWrite = false);
 
         /// <summary>
+        /// 获取传输对象
+        /// </summary>
+        /// <typeparam name="TDto">传输对象类型</typeparam>
+        /// <typeparam name="TProperty">排序字段</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序条件</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        TDto GetDto<TDto, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false);
+
+        /// <summary>
         /// 异步获取传输对象
         /// </summary>
         /// <typeparam name="TDto">传输对象类型</typeparam>
@@ -153,6 +165,18 @@ namespace JQCore.DataAccess.Repositories
         /// <param name="isWrite">是否为写连接(事务中使用)</param>
         /// <returns>传输对象</returns>
         Task<TDto> GetDtoAsync<TDto>(Expression<Func<T, bool>> condition, string[] ignoreFields = null, bool isWrite = false);
+
+        /// <summary>
+        /// 异步获取传输对象
+        /// </summary>
+        /// <typeparam name="TDto">传输对象类型</typeparam>
+        /// <typeparam name="TProperty">排序字段</typeparam>
+        /// <param name="condition">查询条件</param>
+        /// <param name="orderExpression">排序条件</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        Task<TDto> GetDtoAsync<TDto, TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false);
 
         /// <summary>
         /// 获取单个对象
@@ -182,6 +206,17 @@ namespace JQCore.DataAccess.Repositories
         T GetInfo(Expression<Func<T, bool>> condition, string[] ignoreFields = null, bool isWrite = false);
 
         /// <summary>
+        /// 获取单个对象
+        /// </summary>
+        /// <typeparam name="TProperty">排序字段类型</typeparam>
+        /// <param name="condition">获取条件</param>
+        /// <param name="orderExpression">排序字段</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        T GetInfo<TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false);
+
+        /// <summary>
         /// 异步获取单个对象
         /// </summary>
         /// <param name="condition">获取条件</param>
@@ -189,6 +224,17 @@ namespace JQCore.DataAccess.Repositories
         /// <param name="isWrite">是否为写连接(事务中使用)</param>
         /// <returns>传输对象</returns>
         Task<T> GetInfoAsync(Expression<Func<T, bool>> condition, string[] ignoreFields = null, bool isWrite = false);
+
+        /// <summary>
+        /// 异步获取单个对象
+        /// </summary>
+        /// <typeparam name="TProperty">排序字段类型</typeparam>
+        /// <param name="condition">获取条件</param>
+        /// <param name="orderExpression">排序字段</param>
+        /// <param name="ignoreFields">忽略的字段</param>
+        /// <param name="isWrite">是否为写连接(事务中使用)</param>
+        /// <returns>传输对象</returns>
+        Task<T> GetInfoAsync<TProperty>(Expression<Func<T, bool>> condition, Expression<Func<T, TProperty>> orderExpression, string[] ignoreFields = null, bool isWrite = false);
 
         /// <summary>
         /// 插入多条数据
