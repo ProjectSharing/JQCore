@@ -31,10 +31,12 @@ namespace JQCore.Lock
             EnsureUtil.NotNullAndNotEmpty(key, "Lockkey");
             EnsureUtil.NotNullAndNotEmpty(value, "Lockvalue");
             var obj = _LockCache.GetValue(key, () => { return new object(); });
-            Monitor.Enter(obj);
-            _LockUserCache[key] = value;
-            LogUtil.Debug($"{key}:{value}获取锁成功");
-            return true;
+            if (Monitor.TryEnter(obj, span))
+            {
+                _LockUserCache[key] = value;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -65,7 +67,6 @@ namespace JQCore.Lock
                 if (_LockUserCache[key] == value)
                 {
                     Monitor.Exit(obj);
-                    LogUtil.Debug($"{key}:{value}释放锁成功");
                     return true;
                 }
                 return false;

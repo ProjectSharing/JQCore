@@ -133,14 +133,6 @@ namespace JQCore.Redis
         public bool LockRelease(string key, string value)
         {
             var isSuccess = RedisClient.LockRelease(key, value);
-            if (isSuccess)
-            {
-                LogUtil.Debug($"key:{key},value:{value}释放锁成功");
-            }
-            else
-            {
-                LogUtil.Debug($"key:{key},value:{value}释放锁失败");
-            }
             return isSuccess;
         }
 
@@ -165,14 +157,6 @@ namespace JQCore.Redis
         public bool LockTake(string key, string value, TimeSpan span)
         {
             var isSuccess = RedisClient.LockTake(key, value, span);
-            if (isSuccess)
-            {
-                LogUtil.Debug($"key:{key},value:{value}获取锁成功");
-            }
-            else
-            {
-                LogUtil.Debug($"key:{key},value:{value}获取锁失败");
-            }
             return isSuccess;
         }
 
