@@ -234,7 +234,7 @@ namespace JQCore.DataAccess.Uow
 
         protected override void DisposeCode()
         {
-            DataAccess.DisposeTran();
+            DataAccess?.DisposeTran();
         }
     }
 }
