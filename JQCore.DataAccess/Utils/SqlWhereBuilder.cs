@@ -1,4 +1,5 @@
-﻿using JQCore.Extensions;
+﻿using JQCore.DataAccess.DbClient;
+using JQCore.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace JQCore.DataAccess.Utils
     {
         private DatabaseType _dbType;
         private List<WhereInfo> _whereList;
+        private List<DbParameterInfo> _parameterList;
 
         /// <summary>
         ///
@@ -26,6 +28,7 @@ namespace JQCore.DataAccess.Utils
         {
             _dbType = dbType;
             _whereList = new List<WhereInfo>();
+            _parameterList = new List<DbParameterInfo>();
         }
 
         /// <summary>
@@ -115,6 +118,7 @@ namespace JQCore.DataAccess.Utils
             if (obj.IsNotNullAndNotEmptyWhiteSpace())
             {
                 AddWhereInfo(string.Format(" {0}={1}{2} ", key, "{0}", Clean(paramKey ?? key)), isFormat: true);
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -142,6 +146,7 @@ namespace JQCore.DataAccess.Utils
                 {
                     AddWhereInfo(string.Format(" {0} LIKE '%'+{1}{2}+'%' ", key, "{0}", Clean(paramKey ?? key)), isFormat: true);
                 }
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -169,6 +174,7 @@ namespace JQCore.DataAccess.Utils
                 {
                     AddWhereInfo(string.Format(" {0} LIKE {1}{2}+'%' ", key, "{0}", Clean(paramKey ?? key)));
                 }
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -196,6 +202,7 @@ namespace JQCore.DataAccess.Utils
                 {
                     AddWhereInfo(string.Format(" {0} LIKE '%'+{1}{2} ", key, "{0}", Clean(paramKey ?? key)));
                 }
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -218,6 +225,8 @@ namespace JQCore.DataAccess.Utils
             if (minValue.IsNotNullAndNotEmptyWhiteSpace() && maxValue.IsNotNullAndNotEmptyWhiteSpace())
             {
                 AddWhereInfo(string.Format(" {0} BETWEEN {1}{2} AND {1}{3} ", key, "{0}", Clean(startParamKey), Clean(endParamKey)));
+                _parameterList.Add(new DbParameterInfo(Clean(startParamKey), minValue, null, null, null, scale: null));
+                _parameterList.Add(new DbParameterInfo(Clean(endParamKey), maxValue, null, null, null, scale: null));
             }
             else if (minValue.IsNotNullAndNotEmptyWhiteSpace())
             {
@@ -246,6 +255,7 @@ namespace JQCore.DataAccess.Utils
             if (obj.IsNotNullAndNotEmptyWhiteSpace())
             {
                 AddWhereInfo(string.Format(" {0}<{1}{2} ", key, "{0}", Clean(paramKey ?? key)));
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -266,6 +276,7 @@ namespace JQCore.DataAccess.Utils
             if (obj.IsNotNullAndNotEmptyWhiteSpace())
             {
                 AddWhereInfo(string.Format(" {0}>{1}{2} ", key, "{0}", Clean(paramKey ?? key)));
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -286,6 +297,7 @@ namespace JQCore.DataAccess.Utils
             if (obj.IsNotNullAndNotEmptyWhiteSpace())
             {
                 AddWhereInfo(string.Format(" {0}<={1}{2} ", key, "{0}", Clean(paramKey ?? key)));
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -306,6 +318,7 @@ namespace JQCore.DataAccess.Utils
             if (obj.IsNotNullAndNotEmptyWhiteSpace())
             {
                 AddWhereInfo(string.Format(" {0}>={1}{2} ", key, "{0}", Clean(paramKey ?? key)));
+                _parameterList.Add(new DbParameterInfo(Clean(paramKey ?? key), obj, null, null, null, scale: null));
             }
             return this;
         }
@@ -408,6 +421,14 @@ namespace JQCore.DataAccess.Utils
         public void Clear()
         {
             _whereList.Clear();
+        }
+
+        /// <summary>
+        /// 参数列表
+        /// </summary>
+        public List<DbParameterInfo> ParameterList
+        {
+            get { return _parameterList; }
         }
 
         /// <summary>
