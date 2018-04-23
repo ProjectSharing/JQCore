@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace JQCore.Serialization
 {
@@ -14,10 +15,26 @@ namespace JQCore.Serialization
         /// <summary>
         /// 反序列化
         /// </summary>
+        /// <param name="value">json格式字符串</param>
+        /// <param name="type">返回结果类型</param>
+        /// <returns>反序列化对象</returns>
+        object Deserialize(string value, Type type);
+
+        /// <summary>
+        /// 反序列化
+        /// </summary>
         /// <typeparam name="T">结果对象类型</typeparam>
         /// <param name="value">json格式字符串</param>
         /// <returns>反序列化对象</returns>
         T Deserialize<T>(string value);
+
+        /// <summary>
+        /// 异步反序列化
+        /// </summary>
+        /// <param name="value">json格式字符串</param>
+        /// <param name="type">返回结果类型</param>
+        /// <returns>反序列化对象</returns>
+        Task<object> DeserializeAsync(string value, Type type);
 
         /// <summary>
         /// 异步反序列化

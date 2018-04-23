@@ -35,6 +35,14 @@ namespace JQCore.Cache
         object SimpleGetCache(string key);
 
         /// <summary>
+        /// 获取缓存
+        /// </summary>
+        /// <typeparam name="T">返回类型</typeparam>
+        /// <param name="key">需要获取的缓存名称</param>
+        /// <returns></returns>
+        T SimpleGetCache<T>(string key);
+
+        /// <summary>
         /// 判断缓存是否存在
         /// </summary>
         /// <param name="key">需要判断的缓存名称</param>

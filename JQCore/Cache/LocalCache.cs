@@ -57,6 +57,17 @@ namespace JQCore.Cache
         }
 
         /// <summary>
+        /// 获取缓存
+        /// </summary>
+        /// <typeparam name="T">返回类型</typeparam>
+        /// <param name="key">需要获取的缓存名称</param>
+        /// <returns></returns>
+        public T SimpleGetCache<T>(string key)
+        {
+            return SimpleIsExistCache(key) ? _memoryCache.Get<T>(key) : default(T);
+        }
+
+        /// <summary>
         /// 判断缓存是否存在
         /// </summary>
         /// <param name="key">需要判断的缓存名称</param>

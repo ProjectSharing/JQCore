@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -84,14 +85,13 @@ namespace JQCore.Dependency
         /// <param name="lifeStyle">生命周期</param>
         public void RegisterType(Type implementationType, Type[] interceptTypeList, string serviceName = null, LifeStyle lifeStyle = LifeStyle.Singleton)
         {
-            throw new NotSupportedException();
-            //var builder = _containerBuilder;
-            //var registrationBuilder = builder.RegisterType(implementationType).AsSelf();
-            //if (!string.IsNullOrWhiteSpace(serviceName))
-            //{
-            //    registrationBuilder.Named(serviceName, implementationType);
-            //}
-            //registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
+            var builder = _containerBuilder;
+            var registrationBuilder = builder.RegisterType(implementationType).AsSelf();
+            if (!string.IsNullOrWhiteSpace(serviceName))
+            {
+                registrationBuilder.Named(serviceName, implementationType);
+            }
+            registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
         }
 
         public void RegisterType<T>(string serviceName = null, LifeStyle lifeStyle = LifeStyle.Singleton)
@@ -107,14 +107,13 @@ namespace JQCore.Dependency
 
         public void RegisterType<T>(Type[] interceptTypeList, string serviceName = null, LifeStyle lifeStyle = LifeStyle.Singleton)
         {
-            throw new NotSupportedException();
-            //var builder = _containerBuilder;
-            //var registrationBuilder = builder.RegisterType<T>().AsSelf();
-            //if (!string.IsNullOrWhiteSpace(serviceName))
-            //{
-            //    registrationBuilder.Named<T>(serviceName);
-            //}
-            //registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
+            var builder = _containerBuilder;
+            var registrationBuilder = builder.RegisterType<T>().AsSelf();
+            if (!string.IsNullOrWhiteSpace(serviceName))
+            {
+                registrationBuilder.Named<T>(serviceName);
+            }
+            registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
         }
 
         /// <summary>
@@ -145,14 +144,13 @@ namespace JQCore.Dependency
         /// <param name="lifeStyle">生命周期</param>
         public void RegisterType(Type serviceType, Type implementationType, Type[] interceptTypeList, string serviceName = null, LifeStyle lifeStyle = LifeStyle.Singleton)
         {
-            throw new NotSupportedException();
-            //var builder = _containerBuilder;
-            //var registrationBuilder = builder.RegisterType(implementationType).As(serviceType);
-            //if (!string.IsNullOrWhiteSpace(serviceName))
-            //{
-            //    registrationBuilder.Named(serviceName, implementationType);
-            //}
-            //registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
+            var builder = _containerBuilder;
+            var registrationBuilder = builder.RegisterType(implementationType).As(serviceType);
+            if (!string.IsNullOrWhiteSpace(serviceName))
+            {
+                registrationBuilder.Named(serviceName, implementationType);
+            }
+            registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
         }
 
         /// <summary>
@@ -187,14 +185,13 @@ namespace JQCore.Dependency
             where TService : class
             where TImplementer : class, TService
         {
-            throw new NotSupportedException();
-            //var builder = _containerBuilder;
-            //var registrationBuilder = builder.RegisterType<TImplementer>().As<TService>();
-            //if (!string.IsNullOrWhiteSpace(serviceName))
-            //{
-            //    registrationBuilder.Named<TService>(serviceName);
-            //}
-            //registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
+            var builder = _containerBuilder;
+            var registrationBuilder = builder.RegisterType<TImplementer>().As<TService>();
+            if (!string.IsNullOrWhiteSpace(serviceName))
+            {
+                registrationBuilder.Named<TService>(serviceName);
+            }
+            registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
         }
 
         /// <summary>
@@ -231,14 +228,13 @@ namespace JQCore.Dependency
             where TService : class
             where TImplementer : class, TService
         {
-            throw new NotSupportedException();
-            //var builder = _containerBuilder;
-            //var registrationBuilder = builder.RegisterInstance(instance).As<TService>();
-            //if (serviceName != null)
-            //{
-            //    registrationBuilder.Named<TService>(serviceName);
-            //}
-            //registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
+            var builder = _containerBuilder;
+            var registrationBuilder = builder.RegisterInstance(instance).As<TService>();
+            if (serviceName != null)
+            {
+                registrationBuilder.Named<TService>(serviceName);
+            }
+            registrationBuilder.InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
         }
 
         /// <summary>
@@ -270,17 +266,16 @@ namespace JQCore.Dependency
         /// <param name="lifeStyle">生命周期</param>
         public void RegisterAssemblyTypes(Assembly assemblies, Type[] interceptTypeList, Func<Type, bool> predicate = null, LifeStyle lifeStyle = LifeStyle.PerLifetimeScope)
         {
-            throw new NotSupportedException();
-            //if (assemblies != null)
-            //{
-            //    var builder = _containerBuilder;
-            //    var registrationBuilder = builder.RegisterAssemblyTypes(assemblies);
-            //    if (predicate != null)
-            //    {
-            //        registrationBuilder.Where(predicate);
-            //    }
-            //    registrationBuilder.AsImplementedInterfaces().InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
-            //}
+            if (assemblies != null)
+            {
+                var builder = _containerBuilder;
+                var registrationBuilder = builder.RegisterAssemblyTypes(assemblies);
+                if (predicate != null)
+                {
+                    registrationBuilder.Where(predicate);
+                }
+                registrationBuilder.AsImplementedInterfaces().InterceptedBy(interceptTypeList).EnableInterfaceInterceptors().SetLifeStyle(lifeStyle);
+            }
         }
 
         #endregion 注册

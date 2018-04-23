@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -26,6 +27,17 @@ namespace JQCore.Serialization
         }
 
         /// <summary>
+        /// 反序列化
+        /// </summary>
+        /// <param name="value">json格式字符串</param>
+        /// <param name="type">返回结果类型</param>
+        /// <returns>反序列化对象</returns>
+        public object Deserialize(string value, Type type)
+        {
+            return JsonConvert.DeserializeObject(value, type, Settings);
+        }
+
+        /// <summary>
         /// 根据json格式字符串获取对象
         /// </summary>
         /// <typeparam name="T">需要获取的对象</typeparam>
@@ -34,6 +46,17 @@ namespace JQCore.Serialization
         public T Deserialize<T>(string value)
         {
             return JsonConvert.DeserializeObject<T>(value, Settings);
+        }
+
+        /// <summary>
+        /// 异步反序列化
+        /// </summary>
+        /// <param name="value">json格式字符串</param>
+        /// <param name="type">返回结果类型</param>
+        /// <returns>反序列化对象</returns>
+        public Task<object> DeserializeAsync(string value, Type type)
+        {
+            return Task.FromResult(Deserialize(value, type));
         }
 
         /// <summary>

@@ -11,3 +11,5 @@
 /JQCore.Mvc/bin
 /JQCore.Redis/obj
 /JQCore.Redis/bin
+/JQCore.Test/obj
+/JQCore.Test/bin
