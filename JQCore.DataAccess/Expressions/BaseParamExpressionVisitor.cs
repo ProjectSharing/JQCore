@@ -507,6 +507,24 @@ namespace JQCore.DataAccess.Expressions
                     operateSign = "+";
                     break;
 
+                case ExpressionType.Divide:
+                    operateSign = "/";
+                    break;
+
+                case ExpressionType.Modulo:
+                    operateSign = "%";
+                    break;
+
+                case ExpressionType.Multiply:
+                case ExpressionType.MultiplyChecked:
+                    operateSign = "*";
+                    break;
+
+                case ExpressionType.Subtract:
+                case ExpressionType.SubtractChecked:
+                    operateSign = "_";
+                    break;
+
                 case ExpressionType.And:
                 case ExpressionType.AndAlso:
                 case ExpressionType.AndAssign:
